@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+<header id="header">
+  <div class="header-content">
+    <img src="logo-footer.png" alt="INFOSEC Logo" class="header-logo">
+    <nav class="header-nav">
+      <a href="#main-container" class="nav-link">Portal</a>
+      <a href="#ticket-container" class="nav-link">Tickets</a>
+      <a href="#reports" class="nav-link">Reports</a>
+      <a href="#settings" class="nav-link">Settings</a>
+    </nav>
+  </div>
+</header>
+<body>
+  <div class="main-container" id="main-container">
+    <div class="card">
+      <h2>Support Portal</h2>
+      <div class="card-content">
+        <ul class="link-list" id="statusList">
+          <li class="status-item">
+            <a href="https://www.proofpoint.com/us" target="_blank" class="status-link">
+              <span class="status-name">Proofpoint</span>
+              <span class="status-indicator loading"></span>
+            </a>
+          </li>
+          <li class="status-item">
+            <a href="https://orca.security/" target="_blank" class="status-link">
+              <span class="status-name">Orca</span>
+              <span class="status-indicator loading"></span>
+            </a>
+          </li>
+          <li class="status-item">
+            <a href="https://www.sekoia.io/en/homepage/" target="_blank" class="status-link">
+              <span class="status-name">Sekoia</span>
+              <span class="status-indicator loading"></span>
+            </a>
+          </li>
+          <li class="status-item">
+            <a href="https://presecurity.ai/" target="_blank" class="status-link">
+              <span class="status-name">Pre Security</span>
+              <span class="status-indicator loading"></span>
+            </a>
+          </li>
+          <li class="status-item">
+            <a href="https://checkmarx.com/" target="_blank" class="status-link">
+              <span class="status-name">Checkmarx</span>
+              <span class="status-indicator loading"></span>
+            </a>
+          </li>
+          <li class="status-item">
+            <a href="https://www.resecurity.com/" target="_blank" class="status-link">
+              <span class="status-name">Resecurity</span>
+              <span class="status-indicator loading"></span>
+            </a>
+          </li>
+          <li class="status-item">
+            <a href="https://www.pingidentity.com/en.html" target="_blank" class="status-link">
+              <span class="status-name">Ping Identity</span>
+              <span class="status-indicator loading"></span>
+            </a>
+          </li>
+          <li class="status-item">
+            <a href="https://www.cycraft.com/en" target="_blank" class="status-link">
+              <span class="status-name">CyCraft</span>
+              <span class="status-indicator loading"></span>
+            </a>
+          </li>
+          <li class="status-item">
+            <a href="https://pentera.io/" target="_blank" class="status-link">
+              <span class="status-name">Pentera</span>
+              <span class="status-indicator loading"></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="card">
+      <div class="card-content"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-content"></div>
+    </div>
+    <div class="card">
+      <div class="card-content"></div>
+    </div>
+    <div class="card">
+      <div class="card-content"></div>
+    </div>
+    <div class="card">
+      <div class="card-content"></div>
+    </div>
+  </div>
+
+  <div class="ticket-container" id="ticket-container">
+    <div class="ticket-card">
+      <div class="ticket-form-section">
+        <h2>Create Ticket</h2>
+        <form id="ticketForm" class="ticket-form">
+          <div class="form-group">
+            <label for="ticketTitle">Title</label>
+            <input type="text" id="ticketTitle" placeholder="Enter ticket title" required>
+          </div>
+          <div class="form-group">
+            <label for="ticketDescription">Description</label>
+            <textarea id="ticketDescription" placeholder="Describe the issue..." rows="4" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="ticketPriority">Priority</label>
+            <select id="ticketPriority" required>
+              <option value="">Select priority</option>
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+              <option value="critical">Critical</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="ticketAssignee">Assign</label>
+            <input type="text" id="ticketAssignee" placeholder="Assign to..." required>
+          </div>
+          <button type="submit" class="btn-submit">Create Ticket</button>
+        </form>
+      </div>
+
+      <div class="ticket-list-section">
+        <h2>Active Tickets</h2>
+        <div class="ticket-list-wrapper">
+          <ul id="ticketList" class="ticket-list"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <script>
+    // Header hide/show on scroll with hover detection
+    const header = document.getElementById('header');
+    let lastScrollTop = 0;
+    const hoverZone = 50; // pixels from top
+
+    window.addEventListener('scroll', () => {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      
+      if (scrollTop > 100) {
+        // Scrolled down enough, hide header
+        header.classList.add('hidden');
+      } else {
+        // Near top, show header
+        header.classList.remove('hidden');
+      }
+      
+      lastScrollTop = scrollTop;
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      // If near top of screen and header is hidden, show it
+      if (e.clientY < hoverZone && header.classList.contains('hidden')) {
+        header.classList.remove('hidden');
+      }
+    });
+
+    const servers = [
+      { name: 'Proofpoint', url: 'https://www.proofpoint.com/us' },
+      { name: 'Orca', url: 'https://orca.security/' },
+      { name: 'Sekoia', url: 'https://www.sekoia.io/en/homepage/' },
+      { name: 'Pre Security', url: 'https://presecurity.ai/' },
+      { name: 'Checkmarx', url: 'https://checkmarx.com/' },
+      { name: 'Resecurity', url: 'https://www.resecurity.com/' },
+      { name: 'Ping Identity', url: 'https://www.pingidentity.com/en.html' },
+      { name: 'CyCraft', url: 'https://www.cycraft.com/en' },
+      { name: 'Pentera', url: 'https://pentera.io/' }
+    ];
+
+    async function checkServerStatus() {
+      for (let server of servers) {
+        try {
+          const response = await fetch(server.url, { 
+            method: 'HEAD',
+            mode: 'no-cors',
+            cache: 'no-cache'
+          });
+          updateStatus(server.name, 'online');
+        } catch (error) {
+          updateStatus(server.name, 'offline');
+        }
+      }
+    }
+
+    function updateStatus(serverName, status) {
+      const statusList = document.getElementById('statusList');
+      const items = statusList.querySelectorAll('.status-item');
+      
+      items.forEach(item => {
+        if (item.querySelector('.status-name').textContent === serverName) {
+          const indicator = item.querySelector('.status-indicator');
+          indicator.className = `status-indicator ${status}`;
+        }
+      });
+    }
+
+    // Check status on page load
+    checkServerStatus();
+    
+    // Refresh every 30 seconds
+    setInterval(checkServerStatus, 30000);
+
+    // Ticket Management
+    let tickets = JSON.parse(localStorage.getItem('tickets')) || [];
+
+    function renderTickets() {
+      const ticketList = document.getElementById('ticketList');
+      ticketList.innerHTML = '';
+      
+      if (tickets.length === 0) {
+        ticketList.innerHTML = '<li class="no-tickets">No tickets yet</li>';
+        return;
+      }
+
+      tickets.forEach((ticket, index) => {
+        const ticketItem = document.createElement('li');
+        ticketItem.className = `ticket-item priority-${ticket.priority}`;
+        
+        // Parse assignees separated by comma
+        const assignees = ticket.assignee.split(',').map(a => a.trim()).filter(a => a);
+        const assigneeTags = assignees.map(assignee => `<span class="ticket-assignee">${assignee}</span>`).join('');
+        
+        ticketItem.innerHTML = `
+          <div class="ticket-header">
+            <div class="ticket-title">${ticket.title}</div>
+            <span class="ticket-priority">${ticket.priority.toUpperCase()}</span>
+          </div>
+          <div class="ticket-description">${ticket.description}</div>
+          <div class="ticket-assignees">
+            ${assigneeTags}
+          </div>
+          <div class="ticket-footer">
+            <span class="ticket-date">${new Date(ticket.date).toLocaleDateString()}</span>
+            <button class="btn-delete" onclick="deleteTicket(${index})">Delete</button>
+          </div>
+        `;
+        ticketList.appendChild(ticketItem);
+      });
+    }
+
+    function deleteTicket(index) {
+      tickets.splice(index, 1);
+      localStorage.setItem('tickets', JSON.stringify(tickets));
+      renderTickets();
+    }
+
+    document.getElementById('ticketForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const ticket = {
+        title: document.getElementById('ticketTitle').value,
+        description: document.getElementById('ticketDescription').value,
+        priority: document.getElementById('ticketPriority').value,
+        assignee: document.getElementById('ticketAssignee').value,
+        date: new Date().toISOString()
+      };
+
+      tickets.unshift(ticket);
+      localStorage.setItem('tickets', JSON.stringify(tickets));
+      
+      this.reset();
+      renderTickets();
+    });
+
+    // Render tickets on page load
+    renderTickets();
+  </script>
+</body>
+</html>
